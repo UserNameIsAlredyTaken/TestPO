@@ -10,7 +10,7 @@ public class Logarithm {
         double y = (x - 1) / (x + 1);
 
         double sum = 0;
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 1000; i++) {
             sum += element(y, i);
         }
 
@@ -18,7 +18,7 @@ public class Logarithm {
     }
 
     public double element(double x, int power){
-        return pow(x, 1 + 2 * power)/1 + 2 * power;
+        return pow(x, 1 + 2 * power)/(1 + 2 * power);
     }
 
     public class NegativePowException extends RuntimeException {}
