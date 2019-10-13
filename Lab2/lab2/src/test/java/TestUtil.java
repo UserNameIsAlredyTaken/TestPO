@@ -81,4 +81,57 @@ class TestUtil {
 
         return instance;
     }
+
+
+    static Logarithm create_logarithm_mock()
+    {
+        Logarithm instance = Mockito.mock(Logarithm.class);
+        Mockito.when(instance.log(0.227, 2)).thenReturn(-2.13923579737);
+        Mockito.when(instance.log(0.75, 2)).thenReturn(-0.41503749927);
+        Mockito.when(instance.log(3.5, 2)).thenReturn(1.80735492206);
+        Mockito.when(instance.log(10.0, 2)).thenReturn(3.32192809489);
+
+        Mockito.when(instance.log(0.0, 2)).thenReturn(Double.NEGATIVE_INFINITY);
+        Mockito.when(instance.log(0.367, 2)).thenReturn(-1.44614803182);
+        Mockito.when(instance.log(2.5, 2)).thenReturn(1.32192809489);
+
+
+
+        Mockito.when(instance.log(0.227, 5)).thenReturn(-0.9213187);
+        Mockito.when(instance.log(0.75, 5)).thenReturn(-0.1787469);
+        Mockito.when(instance.log(3.5, 5)).thenReturn(0.7783854);
+        Mockito.when(instance.log(10.0, 5)).thenReturn(1.4306766);
+
+        Mockito.when(instance.log(0.0, 5)).thenReturn(Double.NEGATIVE_INFINITY);
+        Mockito.when(instance.log(0.367, 5)).thenReturn(-0.6228221);
+        Mockito.when(instance.log(2.5, 5)).thenReturn(0.5693234);
+
+
+        Mockito.when(instance.log(0.227, 5)).thenReturn(-0.6439741);
+        Mockito.when(instance.log(0.75, 5)).thenReturn(-0.1249387);
+        Mockito.when(instance.log(3.5, 5)).thenReturn(0.544068);
+        Mockito.when(instance.log(10.0, 5)).thenReturn(1.0);
+
+        Mockito.when(instance.log(0.0, 5)).thenReturn(Double.NEGATIVE_INFINITY);
+        Mockito.when(instance.log(0.367, 5)).thenReturn(-0.4353339);
+        Mockito.when(instance.log(2.5, 5)).thenReturn(0.39794);
+
+        return instance;
+    }
+
+
+    static NaturalLogarithm create_natural_logarithm_mock()
+    {
+        NaturalLogarithm instance = Mockito.mock(NaturalLogarithm.class);
+        Mockito.when(instance.ln(0.227)).thenReturn(-1.4828053);
+        Mockito.when(instance.ln(0.75)).thenReturn(-0.2876821);
+        Mockito.when(instance.ln(3.5)).thenReturn(1.252763);
+        Mockito.when(instance.ln(10.0)).thenReturn(2.3025851);
+
+        Mockito.when(instance.ln(0.0)).thenReturn(Double.NEGATIVE_INFINITY);
+        Mockito.when(instance.ln(0.367)).thenReturn(-1.0023934);
+        Mockito.when(instance.ln(2.5)).thenReturn(0.9162907);
+
+        return instance;
+    }
 }
