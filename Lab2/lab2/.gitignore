@@ -1,0 +1,4 @@
+.idea
+.jqwik-database
+src/main/resources/
+target/
