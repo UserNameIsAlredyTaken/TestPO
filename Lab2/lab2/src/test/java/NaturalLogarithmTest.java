@@ -1,3 +1,4 @@
+import com.company.NaturalLogarithm;
 import net.jqwik.api.*;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import org.assertj.core.data.Percentage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LogarithmTest {
+public class NaturalLogarithmTest {
 
     @Provide
     Arbitrary<Integer> first(){
@@ -16,7 +17,7 @@ public class LogarithmTest {
 
     @Property
     void log_check(@ForAll("first") Integer any_int){
-        Logarithm ln = new Logarithm();
+        NaturalLogarithm ln = new NaturalLogarithm();
         double value = ln.ln(any_int);
         double pow = Math.pow(Math.E, value);
         assertThat(pow).isCloseTo(any_int, Offset.offset(0.001));
