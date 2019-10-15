@@ -1,22 +1,24 @@
 package com.company;
 
+import java.math.BigDecimal;
+
 public class Sinus {
     public static double PI = 3.1415926535897932384626433832795;
 
-    public int factorial(int index) {
+    public BigDecimal factorial(int index) {
         if (index < 0) {
             throw new NegativePowException();
         }
 
-        int multiply = 1;
+        BigDecimal multiply = new BigDecimal(1);
         for (int i = 1; i <= index; i++) {
-            multiply *= i;
+            multiply = multiply.multiply(new BigDecimal(i));
         }
         return multiply;
     }
 
-    public double element(double x, int power) {
-        return pow(-1, power) * pow(x, 2 * power + 1) / factorial(2 * power + 1);
+    public BigDecimal element(BigDecimal x, int power) {
+        return pow(new BigDecimal(-1), power).multiply(pow(x, 2 * power + 1)).divide(factorial(2 * power + 1), 3);
     }
 
     public double sin(double x) {
@@ -38,24 +40,26 @@ public class Sinus {
             x = -3.1415926535897932384626433832795 - x;
         }
 
-        double sum = 0;
+        BigDecimal big_x = new BigDecimal(x);
+
+        BigDecimal sum = new BigDecimal(0);
         for (int i = 0; i < 15; i++) {
-            sum += element(x, i);
+            sum = sum.add(element(big_x, i));
         }
 
-        return sum;
+        return sum.doubleValue();
     }
 
     public class NegativePowException extends RuntimeException {}
 
-    public double pow(double x, int power) {
+    public BigDecimal pow(BigDecimal x, int power) {
         if (power < 0) {
             throw new NegativePowException();
         }
 
-        double multiply = 1;
+        BigDecimal multiply = new BigDecimal(1);
         for (int i = 0; i < power; i++) {
-            multiply *= x;
+            multiply = multiply.multiply(x);
         }
         return multiply;
     }
