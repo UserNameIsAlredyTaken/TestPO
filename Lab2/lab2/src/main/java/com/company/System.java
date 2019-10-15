@@ -28,11 +28,11 @@ public class System {
 
     public double SysResult(double x){
         if(x <= 0){
-            return ((cotangent.ctg(x) + secant.sec(x)) / secant.sec(x) - secant.sec(x)) *
-                    (Math.pow(Math.pow(sin.sin(x),3) + secant.sec(x) + sin.sin(x) + cosecant.cosec(x),3));
+            return Math.pow(((cotangent.ctg(x) + secant.sec(x)) / secant.sec(x) - secant.sec(x)) *
+                    (Math.pow(sin.sin(x),3) + secant.sec(x) + sin.sin(x) + cosecant.cosec(x)), 3);
         }else{
             return Math.pow(Math.pow(log.log(x, 5),2), 2) - log.log(x, 2) - log.log(x, 2) +
-                    Math.pow(log.log(x, 5), 3) / (ln.ln(x) / Math.pow(log.log(x, 2), 3) + (log.log(x, 10) - log.log(x, 5)));
+                    Math.pow(log.log(x, 5), 3) / (ln.ln(x) / (Math.pow(log.log(x, 2), 3) + (log.log(x, 10) - log.log(x, 5))));
         }
     }
 
