@@ -1,6 +1,7 @@
 package com.company;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 public class Sinus {
     public static double PI = 3.1415926535897932384626433832795;
@@ -18,7 +19,7 @@ public class Sinus {
     }
 
     public BigDecimal element(BigDecimal x, int power) {
-        return pow(new BigDecimal(-1), power).multiply(pow(x, 2 * power + 1)).divide(factorial(2 * power + 1), 3);
+        return pow(new BigDecimal(-1), power).multiply(pow(x, 2 * power + 1)).divide(factorial(2 * power + 1), MathContext.DECIMAL128);
     }
 
     public double sin(double x) {
