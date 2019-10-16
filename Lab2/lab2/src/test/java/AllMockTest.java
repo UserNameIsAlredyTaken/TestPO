@@ -95,6 +95,11 @@ public class AllMockTest {
     }
 
     @Test
+    public void exact_one() {
+        assertEquals(Double.NaN, system.SysResult(1));
+    }
+
+    @Test
     public void minus_half_pi() {
         assertEquals(Double.NaN, system.SysResult(-Math.PI/2));
     }
@@ -174,9 +179,21 @@ public class AllMockTest {
     }
 
     @Test
-    public void fourtheen() {
+    public void fourteen() {
         assertEquals(1.594851295, system.SysResult(-5.5), 0.1);
     }
+
+    @Test
+    public void fifteen() {
+        assertEquals(-4.944, system.SysResult(0.175), 0.1);
+    }
+
+    @Test
+    public void sixteen() {
+        assertEquals(-1.161, system.SysResult(1.5), 0.1);
+    }
+
+
 
     @Test
     public void minus_pi_two_pi() {

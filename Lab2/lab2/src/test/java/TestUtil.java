@@ -196,8 +196,10 @@ class TestUtil {
     static Logarithm create_logarithm_mock()
     {
         Logarithm instance = Mockito.mock(Logarithm.class);
+        Mockito.when(instance.log(0.175, 2)).thenReturn(-2.515);
         Mockito.when(instance.log(0.227, 2)).thenReturn(-2.13923579737);
         Mockito.when(instance.log(0.75, 2)).thenReturn(-0.41503749927);
+        Mockito.when(instance.log(1.5, 2)).thenReturn(0.585);
         Mockito.when(instance.log(3.5, 2)).thenReturn(1.80735492206);
         Mockito.when(instance.log(10.0, 2)).thenReturn(3.32192809489);
 
@@ -207,8 +209,10 @@ class TestUtil {
 
 
 
+        Mockito.when(instance.log(0.175, 5)).thenReturn(-1.083);
         Mockito.when(instance.log(0.227, 5)).thenReturn(-0.9213187);
         Mockito.when(instance.log(0.75, 5)).thenReturn(-0.1787469);
+        Mockito.when(instance.log(1.5, 5)).thenReturn(0.252);
         Mockito.when(instance.log(3.5, 5)).thenReturn(0.7783854);
         Mockito.when(instance.log(10.0, 5)).thenReturn(1.4306766);
 
@@ -217,8 +221,10 @@ class TestUtil {
         Mockito.when(instance.log(2.5, 5)).thenReturn(0.5693234);
 
 
+        Mockito.when(instance.log(0.175, 10)).thenReturn(-0.757);
         Mockito.when(instance.log(0.227, 10)).thenReturn(-0.6439741);
         Mockito.when(instance.log(0.75, 10)).thenReturn(-0.1249387);
+        Mockito.when(instance.log(1.5, 10)).thenReturn(0.176);
         Mockito.when(instance.log(3.5, 10)).thenReturn(0.544068);
         Mockito.when(instance.log(10.0, 10)).thenReturn(1.0);
 
@@ -238,8 +244,11 @@ class TestUtil {
         Mockito.when(instance.ln(5)).thenReturn(1.609437912);
         Mockito.when(instance.ln(10)).thenReturn(2.302585093);
 
+
+        Mockito.when(instance.ln(0.175)).thenReturn(-1.743);
         Mockito.when(instance.ln(0.227)).thenReturn(-1.4828053);
         Mockito.when(instance.ln(0.75)).thenReturn(-0.2876821);
+        Mockito.when(instance.ln(1.5)).thenReturn(0.405);
         Mockito.when(instance.ln(3.5)).thenReturn(1.252763);
         Mockito.when(instance.ln(10.0)).thenReturn(2.3025851);
 
