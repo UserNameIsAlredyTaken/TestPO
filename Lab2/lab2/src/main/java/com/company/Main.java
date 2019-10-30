@@ -1,6 +1,6 @@
 package com.company;
 
-import com.opencsv.CSVWriter;
+//import com.opencsv.CSVWriter;
 import sun.awt.geom.AreaOp;
 
 import java.io.FileWriter;
@@ -22,28 +22,56 @@ public class Main {
 
 	    System system = new System(sinus,cosinus,cosecant,cotangent, secant, logarithm, naturalLogarithm);
 
-        String csv = "data.csv";
+        String delimrter = ",";
 
-        double current = -10;
-        double finish = 10;
-        double step = 0.2;
+        double current = -5;
+        int finish = 5;
+        float step = 0.2f;
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter(csv));
+            FileWriter csvWriter = new FileWriter("data.csv");
+            csvWriter.append("Current_X");
+            csvWriter.append(delimrter);
+            csvWriter.append("System_result");
+            csvWriter.append(delimrter);
+            csvWriter.append("Sin");
+            csvWriter.append(delimrter);
+            csvWriter.append("Cos");
+            csvWriter.append(delimrter);
+            csvWriter.append("Ctg");
+            csvWriter.append(delimrter);
+            csvWriter.append("Sec");
+            csvWriter.append(delimrter);
+            csvWriter.append("Csc");
+            csvWriter.append(delimrter);
+            csvWriter.append("Ln");
+            csvWriter.append(delimrter);
+            csvWriter.append("Log");
+            csvWriter.append("\n");
 
             for(;current < finish; current += step){
-                ArrayList<String> csvLine = new ArrayList<String>();
 
-                csvLine.add(Double.toString(current));
-                csvLine.add(Double.toString(sinus.sin(current)));
-                csvLine.add(Double.toString(cosinus.cos(current)));
-                csvLine.add(Double.toString(cotangent.ctg(current)));
-                csvLine.add(Double.toString(secant.sec(current)));
-                csvLine.add(Double.toString(cosecant.cosec(current)));
-                csvLine.add(Double.toString(naturalLogarithm.ln(current)));
-                csvLine.add(Double.toString(logarithm.log(current, 2)));
-
-                writer.writeNext(csvLine.toArray(new String[csvLine.size()]));
+                csvWriter.append(Double.toString(current));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(system.SysResult(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(sinus.sin(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(cosinus.cos(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(cotangent.ctg(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(secant.sec(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(cosecant.cosec(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(naturalLogarithm.ln(current)));
+                csvWriter.append(delimrter);
+                csvWriter.append(Double.toString(logarithm.log(current, 2)));
+                csvWriter.append("\n");
             }
+
+            csvWriter.flush();
+            csvWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
