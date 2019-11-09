@@ -6,6 +6,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,7 +19,10 @@ public class ChooseCategory {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+    ChromeOptions chrome_options = new ChromeOptions();
+    chrome_options.addArguments("--window-size=1920,1080");
+
+    driver = new ChromeDriver(chrome_options);
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
@@ -25,7 +30,15 @@ public class ChooseCategory {
   @Test
   public void testChooseCategory() throws Exception {
     driver.get("https://otvet.mail.ru/");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Все вопросы проекта'])[1]/following::span[2]")).click();
+
+    driver.findElement(By.xpath("(.//*[starts-with(@class, 'js-text-inner pm-toolbar__button__text__inner  pm-toolbar__button__text__inner_dropdown')])")).click();
+
+    String categoryName = driver.findElement(By.xpath("(.//*[starts-with(@class, 'js-text pm-toolbar__dropdown__item__text')])[15]")).getText();
+
+    driver.findElement(By.xpath("(.//*[starts-with(@class, 'js-text pm-toolbar__dropdown__item__text')])[15]")).click();
+
+    assertEquals(categoryName, driver.findElement(By.xpath("(.//*[starts-with(@class, 'page-index--h1 bordered')])")).getText());
+    assertEquals(categoryName, driver.findElement(By.xpath("(.//*[starts-with(@itemprop, 'title')])")).getText());
   }
 
   @After
