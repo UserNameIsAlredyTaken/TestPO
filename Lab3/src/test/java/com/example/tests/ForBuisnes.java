@@ -6,6 +6,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,7 +18,7 @@ public class ForBuisnes {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+    driver = new ChromeDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
@@ -25,7 +26,13 @@ public class ForBuisnes {
   @Test
   public void testForBuisnes() throws Exception {
     driver.get("https://otvet.mail.ru/");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Лидеры'])[1]/following::span[7]")).click();
+
+    driver.findElement(By.xpath("(.//*[@class='js-text-inner pm-toolbar__button__text__inner'])[3]")).click();
+
+    assertTrue(isElementPresent(By.xpath("(.//*[@class='_3ykLdYEqVa47ACQrpqnZOj_0 _1PhyBWzfhmt8Bn1dFkNcmY_0 _1-pdrJKRaRRjlZTq2jmb-o_0 UsrGwKH1l6UMTurRlyykl_0 _3yjiq1eTQ6C5KKHlP4SM9W_0'])")));
+
+    assertEquals("Оставить заявку",
+                 driver.findElement(By.xpath("(.//*[@class='_3ykLdYEqVa47ACQrpqnZOj_0 _1PhyBWzfhmt8Bn1dFkNcmY_0 _1-pdrJKRaRRjlZTq2jmb-o_0 UsrGwKH1l6UMTurRlyykl_0 _3yjiq1eTQ6C5KKHlP4SM9W_0'])")).getText());
   }
 
   @After
