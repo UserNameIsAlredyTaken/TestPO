@@ -1,11 +1,14 @@
 package com.example.tests;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,18 +20,51 @@ public class Answer {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+//          System.setProperty("webdriver.chrome.driver","C:\\Users\\danil\\Desktop\\chromedriver_win32\\chromedriver.exe");
+
+    ChromeOptions chrome_options = new ChromeOptions();
+    chrome_options.addArguments("--window-size=1000,1080", "--disable-application-cache");
+
+    driver = new ChromeDriver(chrome_options);
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    driver.get("https://otvet.mail.ru/");
+    driver.findElement(By.id("PH_authLink")).click();
+
+    driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@class='ag-popup__frame__layout__iframe']")));
+    driver.findElement(By.name("Login")).sendKeys("LabTPO");
+    driver.findElement(By.xpath("(.//*[@data-test-id='next-button'])")).click();
+
+    driver.findElement(By.name("Password")).clear();
+    driver.findElement(By.name("Password")).sendKeys("testingpo3");
+
+    driver.findElement(By.xpath("(.//*[@data-test-id='submit-button'])")).click();
+
   }
 
   @Test
   public void testAnswer() throws Exception {
-    driver.get("https://otvet.mail.ru/question/208545881");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Подписаться'])[1]/following::span[1]")).click();
-    driver.findElement(By.name("text")).clear();
-    driver.findElement(By.name("text")).sendKeys(".");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Лишние символы:'])[1]/following::button[1]")).click();
+    driver.findElement(By.xpath("//*[starts-with(@class,'q--li--text')][1]")).click();
+
+    String xPathForAnswers = "//*[starts-with(@class, 'container-for-answers')]/div/*[@class='h-title--b']";
+    String count_answers_before_string = driver.findElement(By.xpath(xPathForAnswers)).getText();
+    Integer count_answers_before;
+    if(count_answers_before_string.indexOf(' ') != -1){
+      count_answers_before = Integer.decode(count_answers_before_string.substring(0 , count_answers_before_string.indexOf(' ')));
+    }else{
+      count_answers_before = 0;
+    }
+
+    driver.findElement(By.xpath("//*[@class='form--text']")).sendKeys("abacaba");
+    driver.findElement(By.xpath("//*[@class='btn btn-primary action--save']")).click();
+
+    Thread.sleep(1000);
+
+    String count_answers_after_string = driver.findElement(By.xpath(xPathForAnswers)).getText();
+    Integer count_answers_after = Integer.decode(count_answers_after_string.substring(0 , count_answers_after_string.indexOf(' ')));
+
+    assertEquals(count_answers_before + 1, count_answers_after.longValue());
   }
 
   @After
