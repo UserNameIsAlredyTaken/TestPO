@@ -6,6 +6,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,18 +19,35 @@ public class Complain {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+//    System.setProperty("webdriver.chrome.driver","C:\\Users\\danil\\Desktop\\chromedriver_win32\\chromedriver.exe");
+
+    ChromeOptions chrome_options = new ChromeOptions();
+    chrome_options.addArguments("--window-size=1000,1080", "--disable-application-cache");
+
+    driver = new ChromeDriver(chrome_options);
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    driver.get("https://otvet.mail.ru/");
+    driver.findElement(By.id("PH_authLink")).click();
+
+    driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@class='ag-popup__frame__layout__iframe']")));
+    driver.findElement(By.name("Login")).sendKeys("LabTPO");
+    driver.findElement(By.xpath("(.//*[@data-test-id='next-button'])")).click();
+
+    driver.findElement(By.name("Password")).clear();
+    driver.findElement(By.name("Password")).sendKeys("testingpo3");
+
+    driver.findElement(By.xpath("(.//*[@data-test-id='submit-button'])")).click();
   }
 
   @Test
   public void testComplain() throws Exception {
-    driver.get("https://otvet.mail.ru/question/217017041");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Ответить'])[1]/following::i[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Спам / реклама'])[1]/following::label[1]")).click();
-    driver.findElement(By.id("abuse-xyi")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Другое'])[3]/following::button[1]")).click();
+    driver.findElement(By.xpath("//*[starts-with(@class,'q--li--text')][1]")).click();//*[@title='Пожаловаться']
+    driver.findElement(By.xpath("//*[@title='Пожаловаться']")).click();//*[@id='abuse-diff']
+    driver.findElement(By.xpath("//*[@id='abuse-xyi']")).click();
+    driver.findElement(By.xpath("//*[@class='btn btn-primary action--abuse-send']")).click();
+    assertTrue(isElementPresent(By.xpath("//*[@class='popup']")));
   }
 
   @After
