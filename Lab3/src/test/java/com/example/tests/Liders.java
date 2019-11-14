@@ -1,9 +1,8 @@
 package com.example.tests;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-
-import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -13,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ChooseQuestion {
+public class Liders {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -21,7 +20,7 @@ public class ChooseQuestion {
 
     @Before
     public void setUp() throws Exception {
-//        System.setProperty("webdriver.chrome.driver","C:\\Users\\danil\\Desktop\\chromedriver_win32\\chromedriver.exe");
+//          System.setProperty("webdriver.chrome.driver","C:\\Users\\danil\\Desktop\\chromedriver_win32\\chromedriver.exe");
 
         ChromeOptions chrome_options = new ChromeOptions();
         chrome_options.addArguments("--window-size=1000,1080", "--disable-application-cache");
@@ -41,18 +40,14 @@ public class ChooseQuestion {
         driver.findElement(By.name("Password")).sendKeys("testingpo3");
 
         driver.findElement(By.xpath("(.//*[@data-test-id='submit-button'])")).click();
+
     }
 
     @Test
-    public void testComplain() throws Exception {
-        String firstQuestPath = "//*[@class='q--li--text']";
-        String qestTitle = driver.findElement(By.xpath(firstQuestPath)).getText();
+    public void testAnswer() throws Exception {
+        driver.findElement(By.xpath("//*[@bem-id='129']")).click();
 
-
-        driver.findElement(By.xpath(firstQuestPath)).click();
-
-        String inQuestTitle = driver.findElement(By.xpath("//*[@class='q--qtext entry-title']")).getText();
-        assertEquals(qestTitle, inQuestTitle);
+        assertEquals(driver.findElement(By.xpath("//*[@class='h1 black base__title']")).getText(), "Лидеры по набранным баллам за неделю");
     }
 
     @After
