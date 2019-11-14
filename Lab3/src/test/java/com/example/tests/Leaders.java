@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Liders {
+public class Leaders {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
